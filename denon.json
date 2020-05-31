@@ -5,11 +5,11 @@
       "cmd": "deno run main.ts",
       "env": {
         "PORT": "3000"
-      }
+      },
+      "allow": [
+        "env",
+        "net"
+      ]
     }
-  },
-  "allow": {
-    "env": true,
-    "net": true
   }
 }
