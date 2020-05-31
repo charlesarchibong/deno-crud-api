@@ -8,7 +8,8 @@
       },
       "allow": [
         "env",
-        "net"
+        "net",
+        "read"
       ]
     }
   }
