@@ -1,3 +1,5 @@
+import User from "../models/User.ts";
+
 export default {
   async index(context: any) {
     context.response.body = "From user router";
@@ -7,8 +9,9 @@ export default {
   },
   async store(context: any) {
     const { value } = await context.request.body();
+    const inserted = await User.insert(value);
     context.response.status = 201;
-    context.response.body = value;
+    context.response.body = { success: true, inserted };
   },
   async update(context: any) {
     context.response.body = context.response.body = context.params.id;
