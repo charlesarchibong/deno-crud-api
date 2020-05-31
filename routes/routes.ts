@@ -4,8 +4,11 @@ import UserController from "../controllers/UserController.ts";
 const router = new Router();
 
 //Users Route
-router.get("/users", UserController.index);
-router.get("/users/:id", UserController.show);
-router.post("/users", UserController.store);
+router
+  .get("/users", UserController.index)
+  .get("/users/:id", UserController.show)
+  .post("/users", UserController.store)
+  .patch("users/:id", UserController.update)
+  .delete("/users/:id", UserController.destroy);
 
 export default router;

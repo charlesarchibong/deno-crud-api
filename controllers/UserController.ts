@@ -10,4 +10,10 @@ export default {
     context.response.status = 201;
     context.response.body = value;
   },
+  async update(context: any) {
+    context.response.body = context.response.body = context.params.id;
+  },
+  async destroy(context: any) {
+    context.response.body = context.response.body = context.params.id;
+  },
 };

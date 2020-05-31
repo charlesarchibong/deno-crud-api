@@ -2,14 +2,16 @@
   "$schema": "https://deno.land/x/denon/schema.json",
   "scripts": {
     "start": {
-      "cmd": "deno run main.ts",
+      "cmd": "deno run --unstable main.ts",
       "env": {
         "PORT": "3000"
       },
       "allow": [
         "env",
         "net",
-        "read"
+        "read",
+        "write",
+        "plugin"
       ]
     }
   }
