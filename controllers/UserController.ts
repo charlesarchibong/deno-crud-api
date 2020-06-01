@@ -51,6 +51,9 @@ export default {
       };
     } else {
       const { value } = await context.request.body();
+      if (value.password) {
+        value.password = bcrypt.hashSync(value.password);
+      }
       value.updated_at = parseInt((new Date().getTime() / 1000).toString());
       const upsertedId = await User.update(id, value);
       if (upsertedId != null) {
