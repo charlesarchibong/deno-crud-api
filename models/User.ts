@@ -20,7 +20,7 @@ export default {
   },
   async update(id: String, data: JSON) {
     try {
-      const filter = { "_id": { "$oid": id } };
+      const filter = { "_id": id };
       console.log(data);
       const { matchedCount, modifiedCount, upsertedId } = await users.updateOne(
         filter,
@@ -32,7 +32,7 @@ export default {
     }
   },
   async delete(id: String) {
-    const filter = { "_id": { "$oid": id } };
+    const filter = { "_id": id };
     return await users.deleteOne(filter);
   },
 };

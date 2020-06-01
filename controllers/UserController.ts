@@ -21,6 +21,7 @@ export default {
     console.log(id);
     const { value } = await context.request.body();
     const upsertedId = await User.update(id, value);
+    console.log(upsertedId);
     if (upsertedId != null) {
       context.response.body = { success: true, upsertedId };
     } else {
