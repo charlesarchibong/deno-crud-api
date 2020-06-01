@@ -28,6 +28,7 @@ export default {
     }
   },
   async destroy(context: any) {
-    context.response.body = context.response.body = context.params.id;
+    const id = context.params.id;
+    context.response.body = User.delete(id);
   },
 };

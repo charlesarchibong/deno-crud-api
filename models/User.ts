@@ -31,7 +31,7 @@ export default {
       console.log(error);
     }
   },
-  async delete(id: String, data: JSON) {
+  async delete(id: String) {
     const filter = { "_id": { "$oid": id } };
     return await users.deleteOne(filter);
   },
