@@ -21,6 +21,7 @@ export default {
   async store(context: any) {
     if (context.request.hasBody) {
       const { value } = await context.request.body();
+      value.created_at = new Date();
       const inserted = await User.insert(value);
       context.response.status = 201;
       context.response.body = { success: true, inserted };
@@ -32,16 +33,13 @@ export default {
 
   async update(context: any) {
     const id = context.params.id;
-    console.log(id);
     const user = await User.get(id);
-    console.log(user);
-    console.log(user);
-    console.log(user.name);
     if (user.name == null) {
       context.response.status = 400;
       context.response.body = { error: "User record was not found" };
     } else {
       const { value } = await context.request.body();
+      value.updated_at = new Date();
       const upsertedId = await User.update(id, value);
       console.log(upsertedId);
       if (upsertedId != null) {
