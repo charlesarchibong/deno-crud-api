@@ -14,7 +14,7 @@ export default {
       context.response.body = user;
     } else {
       context.response.status = 400;
-      context.response.body = { error: "No user record found" };
+      context.response.body = { success: false, error: "No user record found" };
     }
   },
 
@@ -24,10 +24,17 @@ export default {
       value.created_at = parseInt((new Date().getTime() / 1000).toString());
       const inserted = await User.insert(value);
       context.response.status = 201;
-      context.response.body = { success: true, inserted };
+      context.response.body = {
+        success: true,
+        inserted,
+        message: "User record was inserted successfully",
+      };
     } else {
       context.response.status = 400;
-      context.response.body = { error: "Please provide the required data" };
+      context.response.body = {
+        success: false,
+        error: "Please provide the required data",
+      };
     }
   },
 
@@ -36,17 +43,26 @@ export default {
     const user = await User.get(id);
     if (user.name == null) {
       context.response.status = 400;
-      context.response.body = { error: "User record was not found" };
+      context.response.body = {
+        success: false,
+        error: "User record was not found",
+      };
     } else {
       const { value } = await context.request.body();
       value.updated_at = parseInt((new Date().getTime() / 1000).toString());
       const upsertedId = await User.update(id, value);
       if (upsertedId != null) {
         context.response.status = 200;
-        context.response.body = { success: true, upsertedId };
+        context.response.body = {
+          success: true,
+          message: "User record was updated successfully",
+        };
       } else {
         context.response.status = 400;
-        context.response.body = { error: "User record was not updated" };
+        context.response.body = {
+          success: false,
+          error: "User record was not updated",
+        };
       }
     }
   },
@@ -56,18 +72,25 @@ export default {
     const user = await User.get(id);
     if (user == null) {
       context.response.status = 400;
-      context.response.body = { error: "User record was not found" };
+      context.response.body = {
+        success: false,
+        error: "User record was not found",
+      };
       return;
     }
     const deleted = await User.delete(id);
     if (deleted != null) {
       context.response.status = 200;
       context.response.body = {
+        success: true,
         message: "User record was deleted successfully",
       };
     } else {
       context.response.status = 400;
-      context.response.body = { error: "User record was not deleted" };
+      context.response.body = {
+        success: false,
+        error: "User record was not deleted",
+      };
     }
   },
 };
