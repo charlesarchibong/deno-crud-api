@@ -8,5 +8,5 @@ My first implementation of Deno runtime environment for JavaScript and TypeScrip
 
 
 # Edit 
-1. the .env file in the root directory to suite your database 
+1. Change the .env file in the root directory to suite your database 
 
