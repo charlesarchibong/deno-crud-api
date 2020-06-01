@@ -12,25 +12,17 @@ export default {
   },
 
   async get(id: String) {
-    try {
-      const filter = { "_id": { "$oid": id } };
-      return await users.findOne(filter);
-    } catch (error) {
-      console.log(error);
-    }
+    const filter = { "_id": { "$oid": id } };
+    return await users.findOne(filter);
   },
 
   async update(id: String, data: JSON) {
-    try {
-      const filter = { _id: { $oid: id } };
-      const { matchedCount, modifiedCount, upsertedId } = await users.updateOne(
-        filter,
-        { $set: data },
-      );
-      return matchedCount;
-    } catch (error) {
-      console.log(error);
-    }
+    const filter = { _id: { $oid: id } };
+    const { matchedCount, modifiedCount, upsertedId } = await users.updateOne(
+      filter,
+      { $set: data },
+    );
+    return matchedCount;
   },
 
   async delete(id: String) {
