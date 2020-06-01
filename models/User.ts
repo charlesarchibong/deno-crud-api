@@ -10,6 +10,7 @@ export default {
   async getAll() {
     return await users.find();
   },
+
   async get(id: String) {
     try {
       const filter = { "_id": { "$oid": id } };
@@ -18,6 +19,7 @@ export default {
       console.log(error);
     }
   },
+
   async update(id: String, data: JSON) {
     try {
       const filter = { _id: { $oid: id } };
@@ -25,11 +27,12 @@ export default {
         filter,
         { $set: data },
       );
-      return upsertedId;
+      return matchedCount;
     } catch (error) {
       console.log(error);
     }
   },
+
   async delete(id: String) {
     const filter = { _id: { $oid: id } };
     return await users.deleteOne(filter);

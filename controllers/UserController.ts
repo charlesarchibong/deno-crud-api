@@ -5,6 +5,7 @@ export default {
     context.response.status = 200;
     context.response.body = await User.getAll();
   },
+
   async show(context: any) {
     const id = context.params.id;
     const user = await User.get(id);
@@ -16,6 +17,7 @@ export default {
       context.response.body = { error: "No user record found" };
     }
   },
+
   async store(context: any) {
     if (context.request.hasBody) {
       const { value } = await context.request.body();
@@ -27,6 +29,7 @@ export default {
       context.response.body = { error: "Please provide the required data" };
     }
   },
+
   async update(context: any) {
     const id = context.params.id;
     console.log(id);
@@ -50,6 +53,7 @@ export default {
       }
     }
   },
+
   async destroy(context: any) {
     const id = context.params.id;
     const user = await User.get(id);
