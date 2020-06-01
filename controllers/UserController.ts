@@ -31,20 +31,23 @@ export default {
     const id = context.params.id;
     console.log(id);
     const user = await User.get(id);
-    if (user == null) {
+    console.log(user);
+    console.log(user);
+    console.log(user.name);
+    if (user.name == null) {
       context.response.status = 400;
       context.response.body = { error: "User record was not found" };
-      return;
-    }
-    const { value } = await context.request.body();
-    const upsertedId = await User.update(id, value);
-    console.log(upsertedId);
-    if (upsertedId != null) {
-      context.response.status = 200;
-      context.response.body = { success: true, upsertedId };
     } else {
-      context.response.status = 400;
-      context.response.body = { error: "No user found with this id" };
+      const { value } = await context.request.body();
+      const upsertedId = await User.update(id, value);
+      console.log(upsertedId);
+      if (upsertedId != null) {
+        context.response.status = 200;
+        context.response.body = { success: true, upsertedId };
+      } else {
+        context.response.status = 400;
+        context.response.body = { error: "User record was not updated" };
+      }
     }
   },
   async destroy(context: any) {

@@ -21,7 +21,6 @@ export default {
   async update(id: String, data: JSON) {
     try {
       const filter = { _id: { $oid: id } };
-      console.log(data);
       const { matchedCount, modifiedCount, upsertedId } = await users.updateOne(
         filter,
         { $set: data },
