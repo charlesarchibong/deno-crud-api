@@ -1,3 +1,4 @@
+import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 import User from "../models/User.ts";
 
 export default {
@@ -21,6 +22,7 @@ export default {
   async store(context: any) {
     if (context.request.hasBody) {
       const { value } = await context.request.body();
+      value.password = bcrypt.hashSync(value.password);
       value.created_at = parseInt((new Date().getTime() / 1000).toString());
       const inserted = await User.insert(value);
       context.response.status = 201;
