@@ -6,9 +6,9 @@ const router = new Router();
 //Users Route
 router
   .get("/users", auth.api, UserController.index)
-  .get("/users/:id", UserController.show)
+  .get("/users/:id", auth.api, UserController.show)
   .post("/users", UserController.store)
-  .patch("/users/:id", UserController.update)
-  .delete("/users/:id", UserController.destroy);
+  .patch("/users/:id", auth.api, UserController.update)
+  .delete("/users/:id", auth.api, UserController.destroy);
 
 export default router;
