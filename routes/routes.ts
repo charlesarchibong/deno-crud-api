@@ -8,7 +8,7 @@ router
   .get("/users", ...[auth.api], UserController.index)
   .get("/users/:id", ...[auth.api], UserController.show)
   .post("/users", UserController.store)
-  .patch("/users/:id", ...[auth.api], UserController.update)
+  .put("/users/:id", ...[auth.api], UserController.update)
   .delete("/users/:id", ...[auth.api], UserController.destroy);
 
 export default router;
