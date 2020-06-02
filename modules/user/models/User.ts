@@ -1,4 +1,4 @@
-import db from "../config/database.ts";
+import db from "../../../config/database.ts";
 const users = db.collection("users");
 import { ObjectId } from "https://deno.land/x/mongo@v0.7.0/mod.ts";
 export default {

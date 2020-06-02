@@ -7,7 +7,10 @@ const app = new Application();
 
 const env = config();
 const PORT = +env.PORT || 3000;
+// router.get('get',(context){
+//    context.
 
+// })
 app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(notFound);
