@@ -1,26 +1,28 @@
 export default {
   async api(context: any, next: any) {
-    if (context.request.headers.get("authorization") != null) {
+    try {
+      if (
+        context.request.headers.get("authorization") == null
+      ) {
+        throw new Error("Authorization method not available.");
+      }
       const token = context.request.headers.get("x-access-token") ||
         context.request.headers.get("authorization");
       console.log(token);
       const authType = token.split(" ")[0];
       const apiKey = token.split(" ")[1];
-      console.log(authType);
-      if (!token && authType != "Bearer") {
-        context.response.status = 401;
-        context.response.body = {
-          "success": false,
-          "error": "Access token is empty.",
-        };
-        return;
+      if (!token) {
+        throw new Error("No Authorization");
+      }
+      if (authType != "Bearer") {
+        throw new Error("Wrong Authorization method");
       }
       await next();
-    } else {
+    } catch (error) {
       context.response.status = 401;
       context.response.body = {
         "success": false,
-        "error": "Authorization method not available.",
+        "error": error.message,
       };
       return;
     }
