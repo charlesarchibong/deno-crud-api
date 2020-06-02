@@ -27,4 +27,12 @@ export default {
       return;
     }
   },
+
+  async admin(context: any, next: any) {
+    context.response.status = 401;
+    context.response.body = {
+      "success": false,
+      "error": "Stand there",
+    };
+  },
 };
